@@ -4,7 +4,7 @@ variable "sg_name" {
     description = "security gropup name"
 }
 
-variable "sg-description" {
+variable "sg_description" {
     type = string
     default = "This is to create secruity_group name"
 }
@@ -25,7 +25,7 @@ variable "protocol" {
     default = "tcp"
 }
 
-variable "icdr_blocks" {
+variable "cidr_blocks" {
     type = list(string)
     default = ["0.0.0.0/0"]
 }
