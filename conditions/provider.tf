@@ -1,7 +1,7 @@
 terraform {
     required_providers {
-        aws = {
-            source = "/hashicorp/aws"
+        aws = {                #values of source and version should be provided in quoted
+            source = "hashicorp/aws"
             version = "5.66.0"
         }
     }
@@ -10,3 +10,5 @@ terraform {
 provider "aws" {
     region = "us-east-1"
 }
+
+

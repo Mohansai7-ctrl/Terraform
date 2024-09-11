@@ -8,7 +8,7 @@ resource "aws_security_group" "allow_ssh" {
         from_port = 0
         to_port = 0
         protocol = "-1"
-        cidr_blocks = ["0.0.0.0./0"]
+        cidr_blocks = ["0.0.0.0/0"]
         ipv6_cidr_blocks = ["::/0"]
     }
 
@@ -30,7 +30,7 @@ resource "aws_security_group" "allow_ssh" {
 resource "aws_instance" "terraform" {
     ami = "ami-09c813fb71547fc4f"
     vpc_security_group_ids = [aws_security_group.allow_ssh.id]
-    instance_type = var.instance_type == prod ? "t2.micro" : "t3.micro"  #condition, as var.instance_type is dev, condition will fails and it takes t3.micro
+    instance_type = var.instance_type == "prod" ? "t2.micro" : "t3.micro"  #condition, as var.instance_type is dev, condition will fails and it takes t3.micro
     tags = {
         Name = "terraform"
     }
