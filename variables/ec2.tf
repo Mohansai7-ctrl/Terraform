@@ -4,7 +4,12 @@
 resource "aws_security_group" "allow_ssh_terraform" {
     name = var.sg_name  #This is just Security_group name only
     description = var.sg_description
-    tags = var.tags
+    tags = merge(               #merge(list1,list2)
+        var.common_tags,
+        {
+            Name = "allow-ssh"
+        }
+    )
 
     egress {   # name and {} this is block
         from_port = 0
@@ -34,7 +39,12 @@ resource "aws_instance" "terraform" {
     ami = var.ami_id 
     vpc_security_group_ids = [aws_security_group.allow_ssh_terraform.id]
     instance_type = var.instance_type
-    tags = var.tags 
+    tags = merge(
+        {
+            Name = "terraform"
+        },var.common_tags,
+
+    )
 
 
 }
