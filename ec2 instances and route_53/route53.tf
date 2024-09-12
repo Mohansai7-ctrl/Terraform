@@ -3,7 +3,7 @@ resource "aws_route53_record" "private_ip" {
     count = length(var.instance_names)
     zone_id = "Z01771702MEQ3I9CTODSQ"
     #domain_id = "mohansai.online"
-    records = [aws_instance.server[count.index].private_ip]
+    records = [aws_instance.expense[count.index].private_ip]
     name = "${var.instance_names[count.index]}.${var.domain_id}"
     type = "A"
     ttl = 1
@@ -19,7 +19,7 @@ resource "aws_route53_record" "public_ip" {
     zone_id = "Z01771702MEQ3I9CTODSQ"
     #domain_id = "mohansai.online"
     name = var.domain_id
-    records = [aws_instance.server[2].public_ip]
+    records = [aws_instance.expense[2].public_ip]
     allow_overwrite = true
 
 }

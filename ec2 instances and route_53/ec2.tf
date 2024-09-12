@@ -34,7 +34,7 @@ resource "aws_security_group" "allow-ssh" {
 
 
 #creating ec2 instance
-resource "aws_instance" "server" {
+resource "aws_instance" "expense" {
     count = length(var.instance_names)
     ami = data.aws_ami.joindevops.id
     vpc_security_group_ids = [aws_security_group.allow-ssh.id]

@@ -8,7 +8,7 @@ variable "common_tags" {
     type = map(string)
     sensitive = true
     default = {
-        Project = "expense"
+        Project = "server"
         Environment = "dev"
         Terraform = true
     }
