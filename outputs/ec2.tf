@@ -33,12 +33,16 @@ resource "aws_security_group" "allow_ssh_terraform" {
 #creating ec2_instances:
 
 resource "aws_instance" "terraform" {
+    count = length(var.instance_names)
     ami = "ami-09c813fb71547fc4f"
     vpc_security_group_ids = [aws_security_group.allow_ssh_terraform.id]
     instance_type = "t3.micro"
-    tags = {   #it will add Name tag  #name = {} map/ tag, so that it will add name
-        Name = "terraform"
-    }
+    tags = merge(
+        var.common_tags,
+        {
+            Name = var.instance_names[count.index]
+        }
+    )
 
-
+#it will add Name tag  #name = {} map/ tag, so that it will add name
 }

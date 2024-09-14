@@ -38,5 +38,6 @@
 
 
 output "instances_info" {
+    sensitive = false
     value = aws_instance.terraform
 }
