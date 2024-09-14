@@ -7,10 +7,10 @@ resource "aws_instance" "terraform" {
     vpc_security_group_ids = [aws_security_group.allow-ssh.id]
     
 
-    tag = merge(
+    tags = merge(
         var.common_tags,
         {
-            Name = "var.instance_names[count.index]"
+            Name = var.instance_names[count.index]   #should not give in quoted
         }
     )
 }
@@ -19,7 +19,7 @@ resource "aws_instance" "terraform" {
 resource "aws_security_group" "allow-ssh" {
     name = var.sg_name
     description = var.sg_description
-    count = length(var.instance_names)
+    
 
     egress {
         from_port = 0

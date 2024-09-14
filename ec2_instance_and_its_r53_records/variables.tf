@@ -46,3 +46,8 @@ variable "protocol" {
     type = string
     default = "tcp"
 }
+
+variable "domain_name" {
+    type = string
+    default = "mohansai.online"
+}
