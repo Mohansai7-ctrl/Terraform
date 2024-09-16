@@ -8,7 +8,7 @@ variable "instance_type" {
 }
 
 variable "ingress_info" {
-    type = list(string)
+    
     default = [
         {
             from_port = 22

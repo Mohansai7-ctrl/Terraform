@@ -14,8 +14,8 @@ resource "aws_security_group" "allow-ssh" {
     }
 
     dynamic "ingress" {
-        for_each = var.instance_type
-        content{
+        for_each = var.ingress_info
+        content {
             from_port = ingress.value["from_port"]
             to_port = ingress.value["to_port"]
             protocol = ingress.value["protocol"]
@@ -39,7 +39,7 @@ resource "aws_instance" "expense" {
         command = "echo ${self.private_ip} > private_ip.txt"
     }
 
-    #for remote-exec, it need connection block
+    #for remote-exec, it need connection block, this will install nginx server in all 3 created ec2_instances or servers
     connection {
         type = "ssh"
         user = "ec2-user"
