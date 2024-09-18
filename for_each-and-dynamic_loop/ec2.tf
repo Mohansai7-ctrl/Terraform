@@ -10,7 +10,7 @@ resource "aws_security_group" "allow-ssh" {
     }
 
 
-
+   #If any data blocks are repetitive we can use dynamic loop as below:
     dynamic "ingress" {     #use of dynamic loop for_each with content and variable
 
         for_each = var.ingress_info
