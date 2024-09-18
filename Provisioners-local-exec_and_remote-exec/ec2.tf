@@ -34,12 +34,14 @@ resource "aws_instance" "expense" {
     tags = {
         Name = each.key
     }
-
+    
+    #Provisioners are Measures of pragmatism
     provisioner "local-exec" {
         command = "echo ${self.private_ip} > private_ip.txt"
     }
 
     #for remote-exec, it need connection block, this will install nginx server in all 3 created ec2_instances or servers
+    #One connection block is enough for multiple remote-exec provisioners
     connection {
         type = "ssh"
         user = "ec2-user"
@@ -54,4 +56,13 @@ resource "aws_instance" "expense" {
             "sudo systemctl start nginx"
         ]
     }
+
+    provisioner "remote-exec" {
+        when = destroy
+        inline = [
+            "sudo systemctl stop nginx",
+            "sudo dnf remove nginx -y"
+        ]
+    }
+    
 }
